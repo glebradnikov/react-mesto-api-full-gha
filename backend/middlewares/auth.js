@@ -5,7 +5,7 @@ module.exports = (request, response, next) => {
   const { jwt } = request.cookies;
 
   if (!jwt) {
-    throw new UnauthorizedError('Передан неверный JWT');
+    throw new UnauthorizedError('Необходима авторизация');
   }
 
   let payload;
@@ -13,7 +13,7 @@ module.exports = (request, response, next) => {
   try {
     payload = jsonwebtoken.verify(jwt, 'some-secret-key');
   } catch (error) {
-    throw new UnauthorizedError('Передан неверный JWT');
+    throw new UnauthorizedError('Необходима авторизация');
   }
 
   request.user = payload;
