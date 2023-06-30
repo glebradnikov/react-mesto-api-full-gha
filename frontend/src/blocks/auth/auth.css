@@ -1,0 +1,11 @@
+.auth {
+  max-width: 358px;
+  margin: 0 auto;
+  padding: 60px 0 45px;
+}
+
+@media (max-width: 768px) {
+  .auth {
+    padding: 60px 30px 0;
+  }
+}

@@ -1,0 +1,27 @@
+.auth__submit {
+  width: 100%;
+  max-width: 358px;
+  min-height: 50px;
+  padding: 0;
+  border: 0;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.21;
+  color: #000;
+  background: #fff;
+  border-radius: 2px;
+  transition: 1s;
+}
+
+.auth__submit:hover {
+  cursor: pointer;
+  opacity: .85;
+  transition: .5s;
+}
+
+@media (max-width: 768px) {
+  .auth__submit {
+    min-height: 46px;
+    font-size: 16px;
+  }
+}
