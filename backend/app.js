@@ -15,10 +15,9 @@ const { validateSignIn, validateSignUp } = require('./middlewares/validators');
 const { createUser, login } = require('./controllers/users');
 const usersRoutes = require('./routes/users');
 const cardsRoutes = require('./routes/cards');
+const { PORT, DB_URL } = require('./utils/constants');
 const NotFoundError = require('./errors/not-found-error');
 
-const { PORT = 3000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } =
-  process.env;
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,
