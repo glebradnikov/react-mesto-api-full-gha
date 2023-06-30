@@ -7,6 +7,7 @@ const rateLimit = require('express-rate-limit');
 const { errors } = require('celebrate');
 const auth = require('./middlewares/auth');
 const errorHandling = require('./middlewares/error-handling');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { validateSignIn, validateSignUp } = require('./middlewares/validators');
 const { createUser, login } = require('./controllers/users');
 const usersRoutes = require('./routes/users');
@@ -28,6 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(cookieParser());
 app.use(limiter);
+app.use(requestLogger);
 
 app.post('/signin', validateSignIn, login);
 app.post('/signup', validateSignUp, createUser);
@@ -38,6 +40,7 @@ app.use('/cards', cardsRoutes);
 app.use((request, response, next) => {
   next(new NotFoundError('Неправильный путь запрашиваемой страницы'));
 });
+app.use(errorLogger);
 app.use(errors());
 app.use(errorHandling);
 
