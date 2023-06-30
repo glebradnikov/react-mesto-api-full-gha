@@ -16,6 +16,7 @@ export const getUserInfo = () => {
   return fetch(`${apiConfig.URL}/users/me`, {
     method: 'GET',
     headers: apiConfig.HEADERS,
+    credentials: 'include',
   }).then(handleResponse);
 };
 
@@ -27,6 +28,7 @@ export const setUserInfo = (data) => {
       name: data.name,
       about: data.about,
     }),
+    credentials: 'include',
   }).then(handleResponse);
 };
 
@@ -34,6 +36,7 @@ export const getCards = () => {
   return fetch(`${apiConfig.URL}/cards`, {
     method: 'GET',
     headers: apiConfig.HEADERS,
+    credentials: 'include',
   }).then(handleResponse);
 };
 
@@ -45,6 +48,7 @@ export const addCard = (data) => {
       name: data.title,
       link: data.link,
     }),
+    credentials: 'include',
   }).then(handleResponse);
 };
 
@@ -52,6 +56,7 @@ export const deleteCard = (id) => {
   return fetch(`${apiConfig.URL}/cards/${id}`, {
     method: 'DELETE',
     headers: apiConfig.HEADERS,
+    credentials: 'include',
   }).then(handleResponse);
 };
 
@@ -59,6 +64,7 @@ const addLike = (id) => {
   return fetch(`${apiConfig.URL}/cards/${id}/likes`, {
     method: 'PUT',
     headers: apiConfig.HEADERS,
+    credentials: 'include',
   }).then(handleResponse);
 };
 
@@ -66,6 +72,7 @@ const deleteLike = (id) => {
   return fetch(`${apiConfig.URL}/cards/${id}/likes`, {
     method: 'DELETE',
     headers: apiConfig.HEADERS,
+    credentials: 'include',
   }).then(handleResponse);
 };
 
@@ -80,6 +87,7 @@ export const setAvatar = (data) => {
     body: JSON.stringify({
       avatar: data.avatar,
     }),
+    credentials: 'include',
   }).then(handleResponse);
 };
 
@@ -90,6 +98,7 @@ export const checkToken = (token) => {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
+    credentials: 'include',
   }).then(handleResponse);
 };
 
@@ -100,6 +109,7 @@ export const login = (email, password) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ email, password }),
+    credentials: 'include',
   }).then(handleResponse);
 };
 
@@ -110,5 +120,6 @@ export const register = (email, password) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ email, password }),
+    credentials: 'include',
   }).then(handleResponse);
 };

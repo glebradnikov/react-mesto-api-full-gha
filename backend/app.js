@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
 const { errors } = require('celebrate');
 const auth = require('./middlewares/auth');
+const cors = require('./middlewares/cors');
 const errorHandling = require('./middlewares/error-handling');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { validateSignIn, validateSignUp } = require('./middlewares/validators');
@@ -29,6 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(cookieParser());
 app.use(limiter);
+app.use(cors);
 app.use(requestLogger);
 
 app.post('/signin', validateSignIn, login);
