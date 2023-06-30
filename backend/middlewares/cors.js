@@ -1,6 +1,6 @@
 const { ALLOWED_CORS, DEFAULT_ALLOWED_METHODS } = require('../utils/constants');
 
-app.use(function (requset, response, next) {
+module.exports = (requset, response, next) => {
   const { method } = requset;
   const { origin } = requset.headers;
   const requestHeaders = requset.headers['access-control-request-headers'];
@@ -18,4 +18,4 @@ app.use(function (requset, response, next) {
   }
 
   next();
-});
+};
