@@ -12,7 +12,8 @@ module.exports.ALLOWED_CORS = [
   'https://mesto.glebradnikov.nomoreparties.sbs',
   'http://api.mesto.glebradnikov.nomoreparties.sbs',
   'https://api.mesto.glebradnikov.nomoreparties.sbs',
-  'localhost:3000',
+  'http://localhost:3000',
+  'https://localhost:3000',
 ];
 
 module.exports.DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
