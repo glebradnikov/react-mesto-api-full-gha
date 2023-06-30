@@ -1,10 +1,9 @@
 const apiConfig = {
-  URL: 'https://mesto.nomoreparties.co/v1/cohort-55',
+  URL: 'https://api.mesto.glebradnikov.nomoreparties.sbs',
   HEADERS: {
-    authorization: 'e00a1ab1-46c1-4239-9ab0-198fbc69965a',
     'Content-Type': 'application/json',
+    authorization: `Bearer ${localStorage.getItem('jwt')}`,
   },
-  BASE_URL: 'https://auth.nomoreparties.co',
 };
 
 const handleResponse = (response) => {
@@ -85,7 +84,7 @@ export const setAvatar = (data) => {
 };
 
 export const checkToken = (token) => {
-  return fetch(`${apiConfig.BASE_URL}/users/me`, {
+  return fetch(`${apiConfig.URL}/users/me`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -95,7 +94,7 @@ export const checkToken = (token) => {
 };
 
 export const login = (email, password) => {
-  return fetch(`${apiConfig.BASE_URL}/signin`, {
+  return fetch(`${apiConfig.URL}/signin`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -105,7 +104,7 @@ export const login = (email, password) => {
 };
 
 export const register = (email, password) => {
-  return fetch(`${apiConfig.BASE_URL}/signup`, {
+  return fetch(`${apiConfig.URL}/signup`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
