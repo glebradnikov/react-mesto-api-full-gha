@@ -11,7 +11,10 @@ module.exports = (request, response, next) => {
   let payload;
 
   try {
-    payload = jsonwebtoken.verify(jwt, 'some-secret-key');
+    payload = jsonwebtoken.verify(
+      jwt,
+      NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret'
+    );
   } catch (error) {
     throw new UnauthorizedError('Необходима авторизация');
   }
