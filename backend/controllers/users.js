@@ -19,11 +19,6 @@ module.exports.login = (request, response, next) => {
         }
       );
 
-      response.cookie('jwt', token, {
-        maxAge: 3600000,
-        httpOnly: true,
-      });
-
       response.send({ token });
     })
     .catch(next);

@@ -1,11 +1,3 @@
-// const apiConfig = {
-//   URL: 'https://api.mesto.glebradnikov.nomoreparties.sbs',
-//   HEADERS: {
-//     'Content-Type': 'application/json',
-//     Authorization: `Bearer ${localStorage.getItem('jwt')}`,
-//   },
-// };
-
 const handleResponse = (response) => {
   return response.ok
     ? response.json()
@@ -19,7 +11,6 @@ export const checkToken = (token) => {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-    credentials: 'include',
   }).then(handleResponse);
 };
 
@@ -30,7 +21,6 @@ export const login = (email, password) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ email, password }),
-    credentials: 'include',
   }).then(handleResponse);
 };
 
@@ -41,7 +31,6 @@ export const register = (email, password) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ email, password }),
-    credentials: 'include',
   }).then(handleResponse);
 };
 
@@ -52,7 +41,6 @@ export const getUserInfo = () => {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('jwt')}`,
     },
-    credentials: 'include',
   }).then(handleResponse);
 };
 
@@ -67,7 +55,6 @@ export const setUserInfo = (data) => {
       name: data.name,
       about: data.about,
     }),
-    credentials: 'include',
   }).then(handleResponse);
 };
 
@@ -78,7 +65,6 @@ export const getCards = () => {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('jwt')}`,
     },
-    credentials: 'include',
   }).then(handleResponse);
 };
 
@@ -93,7 +79,6 @@ export const addCard = (data) => {
       name: data.title,
       link: data.link,
     }),
-    credentials: 'include',
   }).then(handleResponse);
 };
 
@@ -104,7 +89,6 @@ export const deleteCard = (id) => {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('jwt')}`,
     },
-    credentials: 'include',
   }).then(handleResponse);
 };
 
@@ -117,7 +101,6 @@ const addLike = (id) => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('jwt')}`,
       },
-      credentials: 'include',
     }
   ).then(handleResponse);
 };
@@ -131,7 +114,6 @@ const deleteLike = (id) => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('jwt')}`,
       },
-      credentials: 'include',
     }
   ).then(handleResponse);
 };
@@ -152,7 +134,6 @@ export const setAvatar = (data) => {
       body: JSON.stringify({
         avatar: data.avatar,
       }),
-      credentials: 'include',
     }
   ).then(handleResponse);
 };
