@@ -30,6 +30,25 @@ export const App = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const jwt = localStorage.getItem('jwt');
+
+    if (jwt) {
+      api
+        .checkToken(jwt)
+        .then((response) => {
+          if (response) {
+            setLoggedIn(true);
+            setEmail(response.data.email);
+            navigate('/', { replace: true });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [navigate]);
+
+  useEffect(() => {
     return () => {
       api
         .getUserInfo()
@@ -50,6 +69,46 @@ export const App = () => {
         });
     };
   }, []);
+
+  const handleLogin = (props) => {
+    api
+      .login(props.email, props.password)
+      .then((response) => {
+        if (response.token) {
+          localStorage.setItem('jwt', response.token);
+          setLoggedIn(true);
+          setEmail(props.email);
+          props.setValues({ email: '', password: '' });
+          navigate('/', { replace: true });
+          return response;
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleSignOut = () => {
+    localStorage.removeItem('jwt');
+    setLoggedIn(false);
+    setEmail('');
+    navigate('/sign-in', { replace: true });
+  };
+
+  const handleRegister = (props) => {
+    api
+      .register(props.email, props.password)
+      .then(() => {
+        setRegister(true);
+        setInfoTooltipPopupOpen(true);
+        navigate('/sign-in', { replace: true });
+      })
+      .catch((error) => {
+        setRegister(false);
+        setInfoTooltipPopupOpen(true);
+        console.log(error);
+      });
+  };
 
   const handleEditAvatarClick = () => {
     setEditAvatarPopupOpen(true);
@@ -141,69 +200,6 @@ export const App = () => {
     setAddPlacePopupOpen(false);
     setImagePopupOpen(false);
     setInfoTooltipPopupOpen(false);
-  };
-
-  const handleTokenCheck = () => {
-    if (localStorage.getItem('jwt')) {
-      api
-        .checkToken(localStorage.getItem('jwt'))
-        .then((response) => {
-          if (response) {
-            setLoggedIn(true);
-            setEmail(response.data.email);
-            navigate('/', { replace: true });
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  };
-
-  useEffect(() => {
-    handleTokenCheck();
-
-    // eslint-disable-next-line
-  }, []);
-
-  const handleLogin = (props) => {
-    api
-      .login(props.email, props.password)
-      .then((response) => {
-        if (response.token) {
-          localStorage.setItem('jwt', response.token);
-          setLoggedIn(true);
-          setEmail(props.email);
-          props.setValues({ email: '', password: '' });
-          navigate('/', { replace: true });
-          return response;
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const handleSignOut = () => {
-    localStorage.removeItem('jwt');
-    setLoggedIn(false);
-    setEmail('');
-    navigate('/sign-in', { replace: true });
-  };
-
-  const handleRegister = (props) => {
-    api
-      .register(props.email, props.password)
-      .then(() => {
-        setRegister(true);
-        setInfoTooltipPopupOpen(true);
-        navigate('/sign-in', { replace: true });
-      })
-      .catch((error) => {
-        setRegister(false);
-        setInfoTooltipPopupOpen(true);
-        console.log(error);
-      });
   };
 
   return (

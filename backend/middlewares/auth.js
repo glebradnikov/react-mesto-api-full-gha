@@ -23,4 +23,22 @@ module.exports = (request, response, next) => {
   request.user = payload;
 
   next();
+  //   const { authorization } = request.headers;
+
+  //   if (!authorization) {
+  //     return next(new UnauthorizedError('Требуется авторизация'));
+  //   }
+  //   const token = authorization.replace('Bearer ', '');
+  //   let payload;
+
+  //   try {
+  //     payload = jsonwebtoken.verify(
+  //       token,
+  //       NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret'
+  //     );
+  //   } catch (error) {
+  //     return next(new UnauthorizedError('Требуется авторизация'));
+  //   }
+  //   request.user = payload;
+  //   return next();
 };
