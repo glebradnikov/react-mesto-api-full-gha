@@ -23,7 +23,13 @@ export const App = () => {
   const [isInfoTooltipPopupOpen, setInfoTooltipPopupOpen] = useState(false);
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [isRegister, setRegister] = useState(false);
-  const [currentUser, setCurrentUser] = useState('');
+  const [currentUser, setCurrentUser] = useState({
+    about: '',
+    avatar: '',
+    email: '',
+    name: '',
+    _id: '',
+  });
   const [email, setEmail] = useState('');
   const [cards, setCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState({});
@@ -38,22 +44,18 @@ export const App = () => {
         .then((response) => {
           if (response) {
             setLoggedIn(true);
-            setEmail(response.data.email);
+            setEmail(response.user.email);
             navigate('/', { replace: true });
           }
         })
         .catch((error) => {
           console.log(error);
         });
-    }
-  }, [navigate]);
 
-  useEffect(() => {
-    return () => {
       api
         .getUserInfo()
         .then((response) => {
-          setCurrentUser(response);
+          setCurrentUser(response.user);
         })
         .catch((error) => {
           console.log(error);
@@ -62,13 +64,13 @@ export const App = () => {
       api
         .getCards()
         .then((response) => {
-          setCards(response);
+          setCards(response.cards);
         })
         .catch((error) => {
           console.log(error);
         });
-    };
-  }, []);
+    }
+  }, [navigate]);
 
   const handleLogin = (props) => {
     api
@@ -80,7 +82,6 @@ export const App = () => {
           setEmail(props.email);
           props.setValues({ email: '', password: '' });
           navigate('/', { replace: true });
-          return response;
         }
       })
       .catch((error) => {
@@ -118,7 +119,7 @@ export const App = () => {
     api
       .setAvatar(data)
       .then((response) => {
-        setCurrentUser(response);
+        setCurrentUser(response.user);
         closeAllPopups();
       })
       .catch((error) => {
@@ -135,7 +136,7 @@ export const App = () => {
     api
       .setUserInfo(data)
       .then((response) => {
-        setCurrentUser(response);
+        setCurrentUser(response.user);
         closeAllPopups();
       })
       .catch((error) => {
