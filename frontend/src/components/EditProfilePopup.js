@@ -11,6 +11,7 @@ export const EditProfilePopup = (props) => {
     isValids,
     isValid,
     setValues,
+    setIsValid,
     handleChange,
     resetForm,
   } = useFormAndValidation();
@@ -23,8 +24,10 @@ export const EditProfilePopup = (props) => {
         name: currentUser.name,
         about: currentUser.about,
       });
+
+      setIsValid(true);
     }
-  }, [props.isOpen, currentUser, setValues, resetForm]);
+  }, [currentUser, props.isOpen, resetForm, setIsValid, setValues]);
 
   const handleSubmit = (event) => {
     event.preventDefault();

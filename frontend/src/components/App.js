@@ -23,16 +23,11 @@ export const App = () => {
   const [isInfoTooltipPopupOpen, setInfoTooltipPopupOpen] = useState(false);
   const [isLoggedIn, setLoggedIn] = useState(false);
   const [isRegister, setRegister] = useState(false);
-  const [currentUser, setCurrentUser] = useState({
-    about: '',
-    avatar: '',
-    email: '',
-    name: '',
-    _id: '',
-  });
+  const [currentUser, setCurrentUser] = useState({});
   const [email, setEmail] = useState('');
   const [cards, setCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState({});
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -153,7 +148,7 @@ export const App = () => {
     api
       .addCard(data)
       .then((response) => {
-        setCards([response, ...cards]);
+        setCards([...cards, response.card]);
         closeAllPopups();
       })
       .catch((error) => {
@@ -168,13 +163,13 @@ export const App = () => {
   };
 
   const handleCardLike = (card) => {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
 
     api
       .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
         setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
+          state.map((c) => (c._id === card._id ? newCard.card : c))
         );
       })
       .catch((error) => {

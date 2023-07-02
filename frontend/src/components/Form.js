@@ -13,7 +13,7 @@ export const Form = (props) => {
         className={`popup__submit ${
           props.isValid ? '' : 'popup__submit_disabled'
         }`}
-        disabled={props.isValid}
+        disabled={!props.isValid}
       >
         {props.submitText}
       </button>
