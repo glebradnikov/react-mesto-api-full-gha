@@ -10,7 +10,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.106.140
+IP 158.160.106.140
 
 Frontend https://mesto.glebradnikov.nomoreparties.sbs
 
