@@ -17,5 +17,5 @@ module.exports = (requset, response, next) => {
     return response.end();
   }
 
-  next();
+  return next();
 };

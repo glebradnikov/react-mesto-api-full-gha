@@ -1,10 +1,19 @@
-module.exports.PORT = process.env.PORT = 3000;
-module.exports.DB_URL = process.env.DB_URL =
-  'mongodb://127.0.0.1:27017/mestodb';
-module.exports.NODE_ENV = process.env.NODE_ENV;
-module.exports.JWT_SECRET = process.env.JWT_SECRET;
+const {
+  PORT = 3000,
+  DB_URL = 'mongodb://127.0.0.1:27017/mestodb',
+  NODE_ENV,
+  JWT_SECRET,
+} = process.env;
+
+module.exports = {
+  PORT,
+  DB_URL,
+  NODE_ENV,
+  JWT_SECRET,
+};
 
 module.exports.URL_REGEX =
+  // eslint-disable-next-line no-useless-escape
   /https?:\/\/(www\.)?[a-zA-Z0-9-]+\.[\w\-.~:\/?#[\]@!$&'()*+,;=]+/;
 
 module.exports.ALLOWED_CORS = [

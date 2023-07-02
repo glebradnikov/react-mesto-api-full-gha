@@ -6,7 +6,7 @@ module.exports = (request, response, next) => {
   const { authorization } = request.headers;
 
   if (!authorization) {
-    throw new UnauthorizedError('Необходима авторизация');
+    return next(new UnauthorizedError('Необходима авторизация'));
   }
 
   const token = authorization.replace('Bearer ', '');
@@ -18,10 +18,10 @@ module.exports = (request, response, next) => {
       NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret'
     );
   } catch (error) {
-    throw new UnauthorizedError('Необходима авторизация');
+    return next(new UnauthorizedError('Необходима авторизация'));
   }
 
   request.user = payload;
 
-  next();
+  return next();
 };

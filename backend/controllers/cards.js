@@ -45,7 +45,7 @@ module.exports.deleteCard = (request, response, next) => {
         return;
       }
 
-      Card.findByIdAndRemove(card._id.valueOf())
+      Card.deleteOne()
         .then(() => {
           response.send({ card });
         })
