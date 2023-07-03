@@ -29,14 +29,20 @@ module.exports.createUser = (request, response, next) => {
 
   bcrypt.hash(password, 10).then((hash) => {
     User.create({
+      email,
+      password: hash,
       name,
       about,
       avatar,
-      email,
-      password: hash,
     })
       .then((user) => {
-        response.status(201).send({ user });
+        response.status(201).send({
+          email: user.email,
+          name: user.name,
+          about: user.about,
+          avatar: user.avatar,
+          _id: user._id,
+        });
       })
       .catch((error) => {
         if (error.name === 'ValidationError') {
